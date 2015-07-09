@@ -1,13 +1,13 @@
 package com.pillar.legacyrescue;
 
+import javafx.util.Pair;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -21,26 +21,32 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Map<String, List<Product>> order = new HashMap<>();
-
-        Product pulledPork = new Product();
-        pulledPork.ProductName = "Pulled Pork";
-        pulledPork.Price = new BigDecimal(6.99, new MathContext(2, RoundingMode.HALF_DOWN));
-        pulledPork.Weight = BigDecimal.valueOf(0.5);
-        pulledPork.PricingMethod = "PerPound";
-
-        Product coke = new Product();
-        coke.ProductName = "Coke";
-        coke.Price = new BigDecimal(3.0, new MathContext(2, RoundingMode.HALF_DOWN));
-        coke.Quantity = 2;
-        coke.PricingMethod = "PerItem";
-
-        order.put("John Doe", new ArrayList<Product>(){{add(pulledPork); add(coke);}});
+        Pair<String, List<Product>> order = new Pair<>("John Doe", new ArrayList<Product>()
+        {{
+            add(new Product()
+            {
+                {
+                    ProductName = "Pulled Pork";
+                    Price = new BigDecimal(6.99, new MathContext(2, RoundingMode.HALF_DOWN));
+                    Weight = BigDecimal.valueOf(0.5);
+                    PricingMethod = "PerPound";
+                }
+            });
+            add(new Product()
+            {
+                {
+                    ProductName = "Coke";
+                    Price = new BigDecimal(3.0, new MathContext(2, RoundingMode.HALF_DOWN));
+                    Quantity = 2;
+                    PricingMethod = "PerItem";
+                }
+            });
+        }});
 
         BigDecimal price = BigDecimal.valueOf(0.0);
-        String orderSummary = "ORDER SUMMARY FOR " + order.keySet().iterator().next() + ": \r\n";
+        String orderSummary = "ORDER SUMMARY FOR " + order.getKey() + ": \r\n";
 
-        for (Product orderProduct : order.values().iterator().next())
+        for (Product orderProduct : order.getValue())
         {
             BigDecimal productPrice;
             orderSummary += orderProduct.ProductName;
