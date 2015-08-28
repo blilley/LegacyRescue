@@ -3,23 +3,19 @@ package com.pillar.legacyrescue;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class OrderTest {
     @Test
-    public void invoke_returnsOrderWithSummary(){
+    public void getSummary_WithoutProducts_ReturnsSummary(){
+        String customer = "John Doe";
+        Order order = Order.createOrder().forCustomer(customer);
+        order.addProduct(new PerPoundProduct("Pulled Pork", 0.5, 6.99));
+        order.addProduct(new PerItemProduct("Coke", 2, 3.00));
 
-        Order result = Order.invoke();
-
-        String orderSummary = result.getOrderSummary();
-        assertThat(orderSummary, containsString("ORDER SUMMARY FOR John Doe:"));
-        assertThat(orderSummary, containsString("Pulled Pork $3.50 (0.5 pounds at $7.0 per pound)"));
-        assertThat(orderSummary, containsString("Coke $6 (2 items at $3 each)"));
-        assertThat(result.getPrice().toString(), is("9.50"));
-
-        assertThat(orderSummary, is("ORDER SUMMARY FOR John Doe: \r\n" +
-                "Pulled Pork $3.50 (0.5 pounds at $7.0 per pound)\r\n" +
-                "Coke $6 (2 items at $3 each)\r\n"));
+        assertThat(order.getSummary(), is("ORDER SUMMARY FOR John Doe: \n" +
+                "Pulled Pork $3.50 (0.5 pounds at $6.99 per pound)\n" +
+                "Coke $6.00 (2 items at $3.00 each)\n" +
+                "Total Price: $9.50"));
     }
 }
