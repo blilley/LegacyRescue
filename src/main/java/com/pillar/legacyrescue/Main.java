@@ -44,7 +44,7 @@ public class Main {
         }});
 
         BigDecimal price = BigDecimal.valueOf(0.0);
-        String orderSummary = "ORDER SUMMARY FOR " + order.getKey() + ": \r\n";
+        String orderSummary = "ORDER SUMMARY FOR " + order.getKey() + ": \n";
 
         for (Product orderProduct : order.getValue())
         {
@@ -63,18 +63,10 @@ public class Main {
                 price = price.add(productPrice);
                 orderSummary += (" $" + productPrice + " (" + orderProduct.Quantity + " items at $" + orderProduct.Price + " each)");
             }
-            orderSummary += "\r\n";
+            orderSummary += "\n";
         }
         System.out.println(orderSummary);
         System.out.println("Total Price: $" + price);
-
-        try
-        {
-            System.in.read();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 }
 
