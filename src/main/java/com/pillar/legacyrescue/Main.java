@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Main {
 
 
     public static void main(String[] args) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
         Pair<String, List<Product>> order = new Pair<>("John Doe", new ArrayList<Product>()
         {{
             add(new Product()
@@ -55,13 +57,13 @@ public class Main {
             {
                 productPrice = orderProduct.Weight.multiply(orderProduct.Price);
                 price = price.add(productPrice);
-                orderSummary += (" $" + productPrice + " (" + orderProduct.Weight + " pounds at $" + orderProduct.Price + " per pound)");
+                orderSummary += (" $" + decimalFormat.format(productPrice) + " (" + orderProduct.Weight + " pounds at $" + decimalFormat.format(orderProduct.Price) + " per pound)");
             }
             else // Per item
             {
                 productPrice = orderProduct.Price.multiply(BigDecimal.valueOf(orderProduct.Quantity));
                 price = price.add(productPrice);
-                orderSummary += (" $" + productPrice + " (" + orderProduct.Quantity + " items at $" + orderProduct.Price + " each)");
+                orderSummary += (" $" + decimalFormat.format(productPrice) + " (" + orderProduct.Quantity + " items at $" + decimalFormat.format(orderProduct.Price) + " each)");
             }
             orderSummary += "\n";
         }
