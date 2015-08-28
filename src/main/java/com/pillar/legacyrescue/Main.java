@@ -1,5 +1,9 @@
 package com.pillar.legacyrescue;
 
+import com.pillar.legacyrescue.model.Order;
+import com.pillar.legacyrescue.model.PerItemProduct;
+import com.pillar.legacyrescue.model.PerPoundProduct;
+
 public class Main {
 
     public static void main(String[] args) {

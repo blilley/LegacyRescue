@@ -1,4 +1,4 @@
-package com.pillar.legacyrescue;
+package com.pillar.legacyrescue.model;
 
 import java.math.BigDecimal;
 
