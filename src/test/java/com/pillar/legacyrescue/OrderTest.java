@@ -15,7 +15,7 @@ public class OrderTest {
 
         assertThat(order.getSummary(), is("ORDER SUMMARY FOR John Doe: \n" +
                 "Pulled Pork $3.50 (0.5 pounds at $6.99 per pound)\n" +
-                "Coke $6.00 (2 items at $3.00 each)\n" +
+                "Coke $6.00 (2 items at $3.00 each)\n\n" +
                 "Total Price: $9.50"));
     }
 }

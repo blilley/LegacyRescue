@@ -38,7 +38,7 @@ public class Order {
         for (Product product : orderProducts){
             summaryBuilder.append(product.getSummary() + System.lineSeparator());
         }
-
+        summaryBuilder.append(System.lineSeparator());
         summaryBuilder.append(String.format("Total Price: $%.2f", getTotalPrice()));
 
         return summaryBuilder.toString();
